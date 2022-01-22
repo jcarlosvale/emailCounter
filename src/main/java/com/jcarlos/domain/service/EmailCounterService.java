@@ -6,4 +6,5 @@ public interface EmailCounterService {
 
     EmailCounterDto getEmailCounter();
 
+    void postEmail(String email);
 }

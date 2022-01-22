@@ -1,24 +1,38 @@
 package com.jcarlos.domain.repository;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class EmailCounterRepositoryImpl implements EmailCounterRepository{
 
-    private final ConcurrentHashMap<String, Integer> emailCounterMap;
+    private final Set<String> emailSet;
+    private final Set<String> domainSet;
+
 
     public EmailCounterRepositoryImpl() {
-        this.emailCounterMap = new ConcurrentHashMap<>();
+        this.emailSet = new HashSet<>();
+        this.domainSet = new HashSet<>();
     }
 
     @Override
     public int getEmailCounter() {
-        return emailCounterMap.getOrDefault("emailCounter", 0);
+        return emailSet.size();
     }
 
     @Override
     public int getDomainCounter() {
-        return emailCounterMap.getOrDefault("domainCounter", 0);
+        return domainSet.size();
+    }
+
+    @Override
+    public void saveEmail(String email) {
+        emailSet.add(email);
+    }
+
+    @Override
+    public void saveDomain(String domain) {
+        domainSet.add(domain);
     }
 }
