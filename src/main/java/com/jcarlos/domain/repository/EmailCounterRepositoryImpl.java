@@ -27,12 +27,12 @@ public class EmailCounterRepositoryImpl implements EmailCounterRepository{
     }
 
     @Override
-    public void saveEmail(String email) {
+    public synchronized void saveEmail(String email) {
         emailSet.add(email);
     }
 
     @Override
-    public void saveDomain(String domain) {
+    public synchronized void saveDomain(String domain) {
         domainSet.add(domain);
     }
 }
